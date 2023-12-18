@@ -1,0 +1,3 @@
+{
+  settings = import ./settings.nix;
+}
