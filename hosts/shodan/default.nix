@@ -23,27 +23,61 @@
 
   environment.systemPackages = with pkgs; [
     # podman-compose
-    dropbox-cli
-    fwupd
-    binutils-unwrapped
+    # docker_compose
     (ripgrep.override { withPCRE2 = true; })
-    gnutls
+    bind
+    borgbackup
+    cloud-utils
+    cntr
+    curl
+    dos2unix
+    dropbox-cli
     fd
-    zstd
+    fwupd
+    git
+    gnupg
+    gnutls
+    htop
+    hwinfo
+    kakoune
+    eza
+    lsof
+    mc
+    neovim
+    nixpkgs-fmt
+    nmap
+    pciutils
+    psmisc
+    rnix-lsp
+    rsync
+    tcpdump
+    tpm2-tools
+    traceroute
+    unrar
+    usbutils
     virt-manager
+    wget
     wireguard-tools
+    zstd
   ];
 
 
-  fonts.fonts = with pkgs; [
-    corefonts
-    inconsolata
-    libertine
-    libre-baskerville
-    (nerdfonts.override {
-      fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ];
-    })
-  ];
+  environment.variables = {
+    #    EDITOR = "urxvt";
+  };
+
+
+  fonts = {
+    packages = with pkgs; [
+      corefonts
+      inconsolata
+      libertine
+      libre-baskerville
+      (nerdfonts.override {
+        fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ];
+      })
+    ];
+  };
 
 
   nixpkgs.config.allowUnfree = true;
@@ -56,9 +90,18 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" "repl-flake" ];
       warn-dirty = false;
+      max-jobs = lib.mkDefault 12;
     };
   };
-  nix.maxJobs = lib.mkDefault 12;
+
+  # # For debugging only
+  # nix.extraOptions = ''
+  #   keep-outputs = true
+  #   keep-derivations = true
+  # '';
+  # nix.useSandbox = "relaxed";
+  # nix.trustedUsers = [ config.settings.username ];
+
 
   # TODO: theme "greeter" user GTK instead of using pkral to login
   # services.greetd.settings.default_session.user = config.settings.username;
@@ -69,9 +112,12 @@
     useDHCP = false;
     enableIPv6 = false;
     firewall.enable = false;
-    extraHosts = "";
+    extraHosts = "
+       10.0.0.13 neutron postgres mongo kafka influxdb
+    ";
     domain = "kralovi.net";
   };
+
 
   programs = {
     zsh.enable = true;
@@ -142,6 +188,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    config.common.default = "*";
   };
 
 #####

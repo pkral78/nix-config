@@ -7,10 +7,7 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  programs = {
-    home-manager.enable = true;
-    git.enable = true;
-  };
+  programs.home-manager.enable = true;
 
   programs.vscode = {
     enable = true;
@@ -19,6 +16,203 @@ in
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
+  };
+
+    programs.tmux = {
+    enable = true;
+    clock24 = true;
+    terminal = "tmux-256color";
+    shortcut = "b";
+    extraConfig = ''
+      set -g mouse on
+    '';
+  };
+
+  programs.ssh = {
+    enable = true;
+    forwardAgent = true;
+    controlMaster = "auto";
+    controlPath = "~/.ssh/master-%r@%n:%p";
+    controlPersist = "10m";
+
+    matchBlocks = {
+      "photon" = {
+        hostname = "photon.kralovi.net";
+        user = "pkral";
+      };
+    };
+  };
+
+  programs.git = {
+    enable = true;
+    userName = nixosConfig.settings.name;
+    userEmail = nixosConfig.settings.email;
+    signing = {
+      key = "7B88C3748C24D98B";
+      signByDefault = false;
+    };
+    aliases = {
+      s = "status -s -uno";
+      gl = "log --oneline --graph";
+      pullall = "!git pull --rebase && git submodule update --init --recursive";
+    };
+    ignores = [ ".#*" "*.desktop" ];
+    extraConfig = {
+      branch.autosetuprebase = "never";
+      push.default = "simple";
+      gc.autoDetach = false;
+      core = {
+        autocrlf = "input";
+        symlinks = true;
+        longpaths = true;
+      };
+      http.sslVerify = false;
+      log = { date = "format:%Y-%m-%d %H:%M"; };
+      format = {
+        pretty =
+          "format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(16,trunc)%ad %C(auto,green)%<(32,trunc)%ae%C(auto,reset)%s%C(auto,red)% gD% D";
+      };
+
+    };
+  };
+
+  programs.zsh = rec {
+    enable = true;
+    #    enableAutosuggestions = false;
+    # enabled by oh-my-zsh, this only ensure that compinit is not called twice
+    enableCompletion = false;
+    dotDir = ".config/zsh";
+    history = {
+      size = 10000000;
+      save = 10000000;
+      path = "$HOME/.config/zsh/.zsh_history";
+      expireDuplicatesFirst = true;
+      share = true;
+      extended = true;
+    };
+
+    #    envExtra = ''
+    #    ZSH=$ZDOTDIR/oh-my-zsh
+    #    '';
+
+    initExtraBeforeCompInit = ''
+      source $ZDOTDIR/.shared.zshrc
+    '';
+
+    #    plugins = [
+    #    ];
+
+    #    oh-my-zsh = {
+    #      enable = true;
+    #      plugins = ["autojump" "colored-man-pages" "git" "gitignore" "sudo" "docker" "kubectl"];
+    #      theme = "agnoster";
+    #    };
+
+    shellAliases = {
+      "ll" = "ls -al";
+      "ns" = "nix-shell --command zsh";
+      "hh" = "hstr";
+      "tx" = "tmuxinator";
+    };
+
+    initExtra = ''
+      # hstr
+      setopt hist_expire_dups_first
+      setopt hist_ignore_all_dups
+      setopt hist_ignore_space
+      setopt hist_no_store
+      setopt hist_reduce_blanks
+      setopt share_history
+      setopt magicequalsubst
+      bindkey -s "\C-r" "\C-a hstr -- \C-j"
+      export HSTR_CONFIG=hicolor
+      export HISTFILE=$HISTFILE
+    '';
+
+    /* initExtra = let
+       cdpath = "$HOME/src" +
+       optionalString (config.settings.profile != "malloc47")
+       " $HOME/src/${config.settings.profile}";
+       in
+       ''
+       hg() { history | grep $1 }
+       pg() { ps aux | grep $1 }
+
+       function chpwd() {
+       emulate -L zsh
+       ls
+       }
+
+       cdpath=(${cdpath})
+       '';
+    */
+
+    sessionVariables = {
+      #      EDITOR = "vim";
+      #      HSTR_CONFIG="hicolor";
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=10";
+    };
+  };
+
+  home.file = {
+    ".config/zsh/.shared.zshrc" = {
+      text = ''
+              # OVerriden gnome-keyring ssh-agent https://github.com/NixOS/nixpkgs/issues/101616
+              export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+              ANTIBODY_HOME="$(antibody home)"
+              ZSH_THEME="agnoster"
+
+              plugins=(
+                autojump
+                colored-man-pages
+                docker
+                git
+                gitignore
+                kubectl
+                sudo
+              )
+
+              export ZSH="$ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+
+              # quit bugging me!
+              DISABLE_AUTO_UPDATE="true"
+
+              # omz!
+              source <(antibody init)
+              antibody bundle "
+                robbyrussell/oh-my-zsh
+                zsh-users/zsh-completions
+                spwhitt/nix-zsh-completions
+                zdharma/fast-syntax-highlighting
+                b4b4r07/enhancd
+                #ellie/atuin
+              "
+
+              # enhancd is not antibody "native", must be sourced explicitly
+              export ENHANCD_FILTER=fzf
+              source `antibody path b4b4r07/enhancd`/init.sh
+
+              # TODO Tilda incompatability?
+              # marzocchi/zsh-notify
+
+              setopt auto_cd
+              unsetopt correct_all
+              setopt no_flow_control
+
+              __enhancd::filter::exists()
+        {
+            local line
+
+            while read line
+            do
+                if [[ $line == /mnt/* || -d $line ]]; then
+                    echo "$line"
+                fi
+            done
+        }
+      '';
+    };
   };
 
   home = {
@@ -36,78 +230,74 @@ in
   };
 
   home.packages = with pkgs; [
-    nerdfonts
-    feh
-    firefox
-    google-chrome
-    brave
-    #nitrokey-app
-    slack
-    sublime-merge-dev
-    remmina
-    tilda
-    thunderbird
-    libreoffice-fresh
-    #libreoffice
-    vlc
-    wine
-    tdesktop
-    wireshark
-
     alacritty
-    openjdk8
-    discord
-    sqlitebrowser
-    zim
-    #stm32cubemx
-    #trezor-suite
-    #ledger-live-desktop
-
-    # jetbrains.pycharm-professional
-    # jetbrains.idea-ultimate
-    # jetbrains.webstorm
-    # jetbrains.clion
-    # jetbrains.datagrip
-    # jetbrains.goland
-    # android-studio
-
-    bc
+    antibody
+    autojump
+    azure-cli
     bat
-    file
+    bc
+    bottom # System viewer
+    brave
+    comma # Install and run programs by sticking a , before them
     coreutils
+    discord
+    distrobox # Nice escape hatch, integrates docker images with my environment
+    docker-compose
+    envsubst
+
+    exiftool
+    fd # Better find
+    feh
     ffmpeg
+    file
+    firefox
+    fzf
+    google-chrome
+    gopass
+    hstr
+    httpie # Better curl
     ispell
     jq
     killall
-    pv
-    python39
-    stdenv
-    tmuxinator
-    unzip
-    zip
-    p7zip
-    xz
-    tk
-    fzf
-    patchelf
-    openssl
-    exiftool
-    pdftk
-    openvpn
-    opensc
-    gopass
-    envsubst
-    nixfmt
-    neovim
+    libreoffice-fresh
     lsd
-    rnix-lsp
-    nixpkgs-fmt
-    nil
+    ltex-ls # Spell checking LSP
     mc
+    ncdu # TUI disk usage
+    neovim
+    nerdfonts
+    nil
+    nixfmt
+    nixpkgs-fmt
+    opensc
+    openssl
+    openvpn
+    p7zip
+    patchelf
+    pdftk
+    pv
+    remmina
 
-    docker-compose
-    azure-cli
+    rnix-lsp
+    slack
+    sqlitebrowser
+    stm32cubemx
+    sublime-merge-dev
+    tdesktop
+    thunderbird
+    tilda
+    tk
+    tmuxinator
 
+    trezor-suite
+    unzip
+    vlc
+    wine
+    wireguard-tools
+    wireshark
+    xz
+    zim
+    zip
   ];
 
 
