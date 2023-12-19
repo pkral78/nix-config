@@ -234,73 +234,40 @@ in
     antibody
     autojump
     azure-cli
-    bat
-    bc
-    bottom # System viewer
     brave
-    comma # Install and run programs by sticking a , before them
-    coreutils
+    cntr
+    cloud-utils
     discord
     distrobox # Nice escape hatch, integrates docker images with my environment
     docker-compose
-    envsubst
-
     exiftool
-    fd # Better find
     feh
     ffmpeg
-    file
     firefox
-    fzf
     google-chrome
     gopass
     hstr
-    httpie # Better curl
     ispell
-    jq
-    killall
     libreoffice-fresh
-    lsd
     ltex-ls # Spell checking LSP
-    mc
-    ncdu # TUI disk usage
-    neovim
-    nerdfonts
     nil
-    nixfmt
-    nixpkgs-fmt
-    opensc
-    openssl
-    openvpn
-    p7zip
-    patchelf
     pdftk
     pv
     remmina
-
-    rnix-lsp
     slack
     sqlitebrowser
-    stm32cubemx
     sublime-merge-dev
     tdesktop
     thunderbird
     tilda
     tk
     tmuxinator
-
-    trezor-suite
-    unzip
+    virt-manager
     vlc
     wine
-    wireguard-tools
     wireshark
-    xz
     zim
-    zip
   ];
-
-
 
 }
 

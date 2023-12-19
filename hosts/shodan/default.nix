@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules.settings
+    ./river
   ];
 
   settings.stateVersion = "24.05";
@@ -25,15 +26,21 @@
     # podman-compose
     # docker_compose
     (ripgrep.override { withPCRE2 = true; })
+    bat
+    bc
     bind
     borgbackup
-    cloud-utils
-    cntr
+    bottom # System viewer
+    comma
+    coreutils
     curl
+    httpie # Better curl
     dos2unix
-    dropbox-cli
+    envsubst
     fd
+    file
     fwupd
+    fzf
     git
     gnupg
     gnutls
@@ -41,11 +48,21 @@
     hwinfo
     kakoune
     eza
+    jq
+    lsd
+    killall
     lsof
-    mc
+    ncdu # Disk usage
     neovim
+    nixfmt
     nixpkgs-fmt
     nmap
+    mc
+    opensc
+    openssl
+    openvpn
+    p7zip
+    patchelf
     pciutils
     psmisc
     rnix-lsp
@@ -54,11 +71,13 @@
     tpm2-tools
     traceroute
     unrar
+    unzip
     usbutils
-    virt-manager
     wget
     wireguard-tools
+    xz
     zstd
+    zip
   ];
 
 
