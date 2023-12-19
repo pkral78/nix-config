@@ -43,6 +43,16 @@ in
     ];
   };
 
+  # TODO pkral is this needed?
+  security.pam.services = { swaylock = { }; };
+
+  # TODO pkral in favor of xdb-desktop-portal?
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   config.common.default = "*";
+  # };
+
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;
   fonts.enableDefaultPackages = true;
