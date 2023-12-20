@@ -15,6 +15,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 2;
 
+  console = {
+    earlySetup = true;
+    packages = [ pkgs.powerline-fonts ];
+    font = "ter-powerline-v24b";
+  };
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/63725ab0-fc6c-4c43-85e1-f650d8da7fb5";
       fsType = "ext4";

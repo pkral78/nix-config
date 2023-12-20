@@ -36,6 +36,7 @@
     bat
     bc
     bind
+    binutils
     borgbackup
     bottom # System viewer
     comma
@@ -61,6 +62,7 @@
     lsof
     ncdu # Disk usage
     neovim
+    helix
     nixfmt
     nixpkgs-fmt
     nmap

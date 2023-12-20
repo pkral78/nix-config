@@ -68,6 +68,8 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    foot
+    kitty
     xdg-utils
     # polkit agent
     polkit_gnome
