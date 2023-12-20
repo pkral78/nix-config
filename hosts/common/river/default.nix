@@ -1,11 +1,10 @@
 { pkgs, lib, config,...}:
-let
-  i3bar-river = pkgs.callPackage ./i3bar-river.nix { };
-in
 {
   programs.river = {
     enable = true;
     extraPackages = with pkgs; [
+      foot
+      kitty
       swaylock-effects # lockscreen
       pavucontrol
       swayidle
@@ -68,8 +67,6 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    foot
-    kitty
     xdg-utils
     # polkit agent
     polkit_gnome
