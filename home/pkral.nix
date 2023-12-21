@@ -273,7 +273,7 @@ in
   enable = true;
   pointerCursor = {
     size = 40;
-    package = pkgs.nur.repos.ambroisie.vimix-cursors;
+    package = nixosConfig.nur.repos.humxc.fluent-cursors-theme;
     name = "Vimix-white-cursors";
     # name = "Vimix-cursors";
 

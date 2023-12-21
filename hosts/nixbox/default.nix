@@ -6,6 +6,7 @@
     ../common/base.nix
     ../common/pkral.nix
     inputs.home-manager.nixosModules.home-manager
+    inputs.nur.nixosModules.nur
     outputs.nixosModules.settings
     ../common/river
   ];
