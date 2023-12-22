@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/nix-ld.nix
     ../common/base.nix
     ../common/pkral.nix
     inputs.home-manager.nixosModules.home-manager
