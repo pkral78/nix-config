@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./vbox-fix.nix
     ../common/base.nix
     ../common/pkral.nix
     inputs.home-manager.nixosModules.home-manager
