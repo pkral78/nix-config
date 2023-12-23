@@ -213,6 +213,9 @@ in
         }
       '';
     };
+
+    ".config/river/init".source = ../home/.config/river/init;
+    #
   };
 
   home = {

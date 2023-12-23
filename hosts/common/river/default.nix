@@ -67,6 +67,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    wayland-utils
     xdg-utils
     # polkit agent
     polkit_gnome
