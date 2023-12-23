@@ -8,7 +8,10 @@
 
     nix-ld-rs.url = "github:nix-community/nix-ld-rs";
     nix-ld-rs.inputs.nixpkgs.follows = "nixpkgs";
-    
+
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -23,5 +23,5 @@
     extraSpecialArgs = { inherit inputs outputs; };
   };
 
-  home-manager.users.${config.settings.username} = import ../../home/pkral.nix;
+  home-manager.users.${config.settings.username} = import ../../home-manager/pkral.nix;
 }

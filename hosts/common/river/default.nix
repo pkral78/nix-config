@@ -1,4 +1,4 @@
-{ pkgs, lib, config,...}:
+{ pkgs, lib, config, inputs,...}:
 {
   programs.river = {
     enable = true;
@@ -103,6 +103,8 @@
           exec systemctl --user start river.service
         '';
     })
+  ] ++ [
+    inputs.nixpkgs-wayland.packages.${system}.wlr-randr
   ];
 
   # for polkit
