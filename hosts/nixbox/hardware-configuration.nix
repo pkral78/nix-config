@@ -23,18 +23,19 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/63725ab0-fc6c-4c43-85e1-f650d8da7fb5";
+    {
+      device = "/dev/disk/by-uuid/63725ab0-fc6c-4c43-85e1-f650d8da7fb5";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B212-CAA9";
+    {
+      device = "/dev/disk/by-uuid/B212-CAA9";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/fa637dbd-b08e-4db3-8c5e-969a30bc9500"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/fa637dbd-b08e-4db3-8c5e-969a30bc9500"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -43,15 +44,15 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
 
-#  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-#  virtualisation.virtualbox.guest.enable = true;
+  #  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  #  virtualisation.virtualbox.guest.enable = true;
 
-# TODO https://discourse.nixos.org/t/nixos-shell-in-nixos-vm-does-not-seem-to-be-recognizing-store-paths/14377/2
-nix.nixPath = [
+  # TODO https://discourse.nixos.org/t/nixos-shell-in-nixos-vm-does-not-seem-to-be-recognizing-store-paths/14377/2
+  nix.nixPath = [
     "nixpkgs=${pkgs.path}"
-];
+  ];
 
-virtualisation.vmVariant = {
+  virtualisation.vmVariant = {
     virtualisation.memorySize = 2048;
     virtualisation.cores = 2;
     virtualisation.resolution = {

@@ -19,32 +19,32 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
-  let
-    inherit (self) outputs;
-  in
-  {
-    nixosModules = import ./modules;
-    nixosConfigurations = {
+    let
+      inherit (self) outputs;
+    in
+    {
+      nixosModules = import ./modules;
+      nixosConfigurations = {
         shodan = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-                inherit inputs outputs;
-            };
-            modules = [
-              ./hosts/shodan
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./hosts/shodan
           ];
-      };
+        };
 
-      nixbox = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-                inherit inputs outputs;
-            };
-            modules = [
-              ./hosts/nixbox
+        nixbox = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./hosts/nixbox
           ];
+        };
       };
     };
-  };
 
 }

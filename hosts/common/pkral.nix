@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, outputs, lib, ...}: {
+{ pkgs, config, inputs, outputs, lib, ... }: {
 
   # Increase open file limit for sudoers
   security.pam.loginLimits = [
@@ -19,7 +19,7 @@
   security.sudo.wheelNeedsPassword = false;
   services.getty.autologinUser = "${config.settings.username}";
 
-#####
+  #####
 
   users.mutableUsers = false;
   users.users.${config.settings.username} = {

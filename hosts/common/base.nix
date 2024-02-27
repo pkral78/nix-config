@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, outputs, lib, ...} : {
+{ pkgs, config, inputs, outputs, lib, ... }: {
 
   settings.stateVersion = "24.05";
 

@@ -18,7 +18,7 @@ in
     nix-direnv.enable = true;
   };
 
-    programs.tmux = {
+  programs.tmux = {
     enable = true;
     clock24 = true;
     terminal = "tmux-256color";
@@ -274,31 +274,31 @@ in
   ];
 
   home.pointerCursor = {
-  gtk.enable = true;
-  package = pkgs.bibata-cursors;
-  name = "Bibata-Modern-Ice";
-  size = 22;
-};
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 22;
+  };
 
-#   xsession = {
-#   enable = true;
-#   pointerCursor = {
-#     size = 40;
-#     package = nixosConfig.nur.repos.humxc.fluent-cursors-theme;
-#     name = "Vimix-white-cursors";
-#     # name = "Vimix-cursors";
+  #   xsession = {
+  #   enable = true;
+  #   pointerCursor = {
+  #     size = 40;
+  #     package = nixosConfig.nur.repos.humxc.fluent-cursors-theme;
+  #     name = "Vimix-white-cursors";
+  #     # name = "Vimix-cursors";
 
-#     # package = pkgs.capitaine-cursors;
-#     # name = "capitaine-cursors";
+  #     # package = pkgs.capitaine-cursors;
+  #     # name = "capitaine-cursors";
 
-#     # package = pkgs.nur.repos.ambroisie.volantes-cursors;
-#     # name = "volantes_light_cursors";
-#     # name = "volantes_cursors";
+  #     # package = pkgs.nur.repos.ambroisie.volantes-cursors;
+  #     # name = "volantes_light_cursors";
+  #     # name = "volantes_cursors";
 
-#     # package = pkgs.nur.repos.dan4ik605743.lyra-cursors;
-#     # name = "LyraF-cursors";
-#   };
-# };
+  #     # package = pkgs.nur.repos.dan4ik605743.lyra-cursors;
+  #     # name = "LyraF-cursors";
+  #   };
+  # };
 
 }
 
