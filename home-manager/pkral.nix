@@ -9,9 +9,9 @@ in
 
   programs.home-manager.enable = true;
 
-  programs.vscode = {
-    enable = true;
-  };
+  # programs.vscode = {
+  #   enable = true;
+  # };
 
   programs.direnv = {
     enable = true;
@@ -234,51 +234,52 @@ in
   };
 
   home.packages = with pkgs; [
-    alacritty
+    #alacritty
     antibody
     autojump
     azure-cli
-    brave
+    #brave
     cntr
     cloud-utils
-    discord
+    #discord
     distrobox # Nice escape hatch, integrates docker images with my environment
     docker-compose
     exiftool
-    feh
+    #feh
     ffmpeg
-    firefox
-    google-chrome
+    #firefox
+    #google-chrome
     gopass
     hstr
     ispell
-    libreoffice-fresh
+    #libreoffice-fresh
     ltex-ls # Spell checking LSP
     nil
     pdftk
     pv
-    remmina
-    slack
-    sqlitebrowser
-    sublime-merge-dev
-    tdesktop
-    thunderbird
-    tilda
-    tk
+    #remmina
+    #slack
+    #sqlitebrowser
+    #sublime-merge-dev
+    #tdesktop
+    #thunderbird
+    #tilda
+    #tk
     tmuxinator
-    virt-manager
-    vlc
+    #virt-manager
+    #vlc
     wine
-    wireshark
+    #wireshark
     zim
   ];
 
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
-    size = 22;
-  };
+
+  # home.pointerCursor = {
+  #   gtk.enable = true;
+  #   package = pkgs.bibata-cursors;
+  #   name = "Bibata-Modern-Ice";
+  #   size = 22;
+  # };
 
   #   xsession = {
   #   enable = true;
