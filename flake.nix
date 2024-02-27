@@ -25,6 +25,7 @@
     {
       nixosModules = import ./modules;
       nixosConfigurations = {
+
         shodan = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
@@ -44,6 +45,17 @@
             ./hosts/nixbox
           ];
         };
+
+        contabo = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [
+            ./hosts/contabo
+          ];
+        };
+        
       };
     };
 
