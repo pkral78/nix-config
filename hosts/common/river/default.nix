@@ -44,6 +44,7 @@
 
   # TODO pkral is this needed?
   security.pam.services = { swaylock = { }; };
+  security.polkit.enable = true;
 
   # TODO pkral in favor of xdb-desktop-portal?
   # xdg.portal = {
@@ -94,7 +95,7 @@
         ''
           #! ${pkgs.bash}/bin/bash
 
-          ${pkgs.rbw}/bin/rbw unlock
+          #${pkgs.rbw}/bin/rbw unlock
           ${pkgs.openssh}/bin/ssh-add
           export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
           # first import environment variables from the login manager
@@ -141,4 +142,28 @@
       TimeoutStopSec = 10;
     };
   };
+
+  # systemd.user.services.kanshi = {
+  #     enable = true;
+  #     description = "kanshi daemon";
+  #     # wantedBy = [];
+  #     after = ["river.service"]; # Ensure kanshi starts after river
+  #     partOf = ["river.service"]; # Optional: stop kanshi when river stops
+  #     serviceConfig = {
+  #       Type = "simple";
+  #       ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
+  #     };
+
+  #   # profiles = {
+  #   #   qemu = {
+  #   #     outputs = [
+  #   #       { criteria = "Virtual-1";
+  #   #         status = "enable";
+  #   #         scale = 2;
+  #   #         mode = "2560x1440";
+  #   #       }
+  #   #     ];
+  #   #   };
+  #   # };
+  # };
 }

@@ -215,6 +215,7 @@ in
     };
 
     ".config/river/init".source = ../home/.config/river/init;
+    ".config/kanshi/config".source = ../home/.config/kanshi/config;
     #
   };
 

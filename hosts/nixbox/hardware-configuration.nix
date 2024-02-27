@@ -9,6 +9,7 @@
   boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
+  boot.kernelParams = [ "video=2560x1440@165" ];
   boot.extraModulePackages = [ ];
 
   boot.loader.systemd-boot.enable = true;
@@ -44,16 +45,22 @@
 
 #  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 #  virtualisation.virtualbox.guest.enable = true;
+
+# TODO https://discourse.nixos.org/t/nixos-shell-in-nixos-vm-does-not-seem-to-be-recognizing-store-paths/14377/2
+nix.nixPath = [
+    "nixpkgs=${pkgs.path}"
+];
+
 virtualisation.vmVariant = {
     virtualisation.memorySize = 2048;
     virtualisation.cores = 2;
     virtualisation.resolution = {
-      x = 1280;
-      y = 1024;
+      x = 2560;
+      y = 1440;
     };
     virtualisation.qemu.options = [
       # Better display option
-      "-vga qxl"
+      "-vga none -device qxl-vga,vgamem_mb=32"
       # Enable copy/paste
       # https://www.kraxel.org/blog/2021/05/qemu-cut-paste/
       "-chardev qemu-vdagent,id=ch1,name=vdagent,clipboard=on"
@@ -61,4 +68,5 @@ virtualisation.vmVariant = {
       "-device virtserialport,chardev=ch1,id=ch1,name=com.redhat.spice.0"
     ];
   };
+
 }

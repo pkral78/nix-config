@@ -1,0 +1,3 @@
+profile qemu {
+  output Virtual-1 enable scale 2 mode 2560x1440
+}
