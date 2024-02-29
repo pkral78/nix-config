@@ -3,6 +3,8 @@
     ./hardware-configuration.nix
     ../common/base.nix
     ../common/pkral.nix
+    ../common/global/acme.nix
+    ../common/services/nginx.nix
     ./services/headscale.nix
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules.settings
@@ -10,14 +12,18 @@
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-  networking.hostName = "contabo";
-  networking.domain = "";
+
+  networking = {
+    hostName = "contabo";
+    domain = "";
+    enableIPv6 = false;
+  };
 
   services.openssh = {
     enable = true;
     settings = {
-          PermitRootLogin = "no";
-          PasswordAuthentication = false;
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
     };
   };
   programs.ssh.startAgent = true;

@@ -1,4 +1,4 @@
- { pkgs, config, nixosConfig, inputs, outputs, lib, ... }:
+{ pkgs, config, nixosConfig, inputs, outputs, lib, ... }:
 let
   names = builtins.attrNames config;
 in
