@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ../common/base.nix
     ../common/pkral.nix
+    ./services/headscale.nix
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules.settings
   ];
