@@ -158,7 +158,7 @@ in
     ".config/zsh/.shared.zshrc" = {
       text = ''
               # OVerriden gnome-keyring ssh-agent https://github.com/NixOS/nixpkgs/issues/101616
-              export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#              export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
               ANTIBODY_HOME="$(antibody home)"
               ZSH_THEME="agnoster"
