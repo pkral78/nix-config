@@ -157,60 +157,60 @@ in
   home.file = {
     ".config/zsh/.shared.zshrc" = {
       text = ''
-              # OVerriden gnome-keyring ssh-agent https://github.com/NixOS/nixpkgs/issues/101616
-#              export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+                      # OVerriden gnome-keyring ssh-agent https://github.com/NixOS/nixpkgs/issues/101616
+        #              export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
-              ANTIBODY_HOME="$(antibody home)"
-              ZSH_THEME="agnoster"
+                      ANTIBODY_HOME="$(antibody home)"
+                      ZSH_THEME="agnoster"
 
-              plugins=(
-                autojump
-                colored-man-pages
-                docker
-                git
-                gitignore
-                kubectl
-                sudo
-              )
+                      plugins=(
+                        autojump
+                        colored-man-pages
+                        docker
+                        git
+                        gitignore
+                        kubectl
+                        sudo
+                      )
 
-              export ZSH="$ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+                      export ZSH="$ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 
-              # quit bugging me!
-              DISABLE_AUTO_UPDATE="true"
+                      # quit bugging me!
+                      DISABLE_AUTO_UPDATE="true"
 
-              # omz!
-              source <(antibody init)
-              antibody bundle "
-                robbyrussell/oh-my-zsh
-                zsh-users/zsh-completions
-                spwhitt/nix-zsh-completions
-                zdharma/fast-syntax-highlighting
-                b4b4r07/enhancd
-                #ellie/atuin
-              "
+                      # omz!
+                      source <(antibody init)
+                      antibody bundle "
+                        robbyrussell/oh-my-zsh
+                        zsh-users/zsh-completions
+                        spwhitt/nix-zsh-completions
+                        zdharma/fast-syntax-highlighting
+                        b4b4r07/enhancd
+                        #ellie/atuin
+                      "
 
-              # enhancd is not antibody "native", must be sourced explicitly
-              export ENHANCD_FILTER=fzf
-              source `antibody path b4b4r07/enhancd`/init.sh
+                      # enhancd is not antibody "native", must be sourced explicitly
+                      export ENHANCD_FILTER=fzf
+                      source `antibody path b4b4r07/enhancd`/init.sh
 
-              # TODO Tilda incompatability?
-              # marzocchi/zsh-notify
+                      # TODO Tilda incompatability?
+                      # marzocchi/zsh-notify
 
-              setopt auto_cd
-              unsetopt correct_all
-              setopt no_flow_control
+                      setopt auto_cd
+                      unsetopt correct_all
+                      setopt no_flow_control
 
-              __enhancd::filter::exists()
-        {
-            local line
+                      __enhancd::filter::exists()
+                {
+                    local line
 
-            while read line
-            do
-                if [[ $line == /mnt/* || -d $line ]]; then
-                    echo "$line"
-                fi
-            done
-        }
+                    while read line
+                    do
+                        if [[ $line == /mnt/* || -d $line ]]; then
+                            echo "$line"
+                        fi
+                    done
+                }
       '';
     };
 
