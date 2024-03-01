@@ -12,6 +12,10 @@ in
       recommendedOptimisation = true;
       clientMaxBodySize = "300m";
 
+      appendHttpConfig = ''
+        error_log stderr;
+        access_log syslog:server=unix:/dev/log combined;
+      '';
       # virtualHosts."${hostName}.m7.rs" = {
       #   default = true;
       #   forceSSL = true;
