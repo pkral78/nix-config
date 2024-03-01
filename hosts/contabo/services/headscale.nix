@@ -29,7 +29,7 @@ in
           level = "warn";
         };
         ip_prefixes = [
-          "10.64.0.0/16"
+          "100.64.0.0/10"
         ];
         derp.server = {
           enable = true;
